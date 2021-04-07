@@ -1,8 +1,9 @@
 import Comment from "./Comment";
 
-const Comments = (comments) => {
+const Comments = ({comments}) => {
     // debugger
-    const commentArray = comments.comments
+    const commentArray = comments
+    console.log(comments)
     const commentItems = commentArray.map((comment) => {
         return (
             <Comment 
