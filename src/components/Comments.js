@@ -4,15 +4,12 @@ import React, {useState} from "react";
 const Comments = ({comments}) => {
 
     const [searchText, setSearchText] = useState('')
+    const [isShow, setIsShow] = useState('none')
+    const [commentList, setCommentList] = useState(comments)
 
-    const filteredComments = comments.filter((comment) => {
+    const filteredComments = commentList.filter((comment) => {
         return comment.user.includes(searchText);
     })
-
-    const [currentState, setState] = useState('none')
-    function handleCommentsToggle () {
-        setState((currentState) => !currentState)
-    }
 
     const commentItems = filteredComments.map((comment) => {
         return (
@@ -26,28 +23,29 @@ const Comments = ({comments}) => {
         )
     })
 
-    const [commentList, setCommentList] = useState(commentItems)
-    function handleDelete (id) {
-        console.log(id)
-        const newComments = commentList.filter((comment) => { 
-            console.log(comment)
-            return comment.id !== id})
-        console.log(newComments)
-        setCommentList(newComments)
+    function handleCommentsToggle () {
+        setIsShow((isShow) => !isShow)
     }
-    console.log(commentList)
+     
     function handleSearch (event) {
         setSearchText(event.target.value) 
+    }
+
+    function handleDelete (id) {
+        const newComments = commentList.filter((comment) => { 
+            return comment.id !== id})
+        setCommentList(newComments)
     }
 
     return(
         <>
         <div className="button">
-            <button className="comments-toggle" onClick={handleCommentsToggle}>{currentState ? "Hide" : "Show" } Comments</button>
+            <button className="comments-toggle" onClick={handleCommentsToggle}>{isShow ? "Hide" : "Show" } Comments</button>
         </div>
+
         <input onChange={handleSearch} type="text" placeholder="Search" />
 
-        <div className="comments" style={{ display: currentState ? "block" : "none" }}>
+        <div className="comments" style={{ display: isShow ? "block" : "none" }}>
             <h3>{comments.length} Comments</h3>
             {commentItems}
         </div>

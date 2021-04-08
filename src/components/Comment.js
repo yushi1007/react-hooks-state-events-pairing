@@ -11,8 +11,6 @@ const Comment = ({ id, user, comment, onDelete }) => {
         setDownvotes((downvote) => downvote + 1)
     }
 
-   
-
     return (
         <div className="user-comment">
             <h4>{user}</h4>
