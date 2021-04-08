@@ -4,16 +4,13 @@ import React, {useState} from "react";
 const Comments = ({comments}) => {
 
     const [searchText, setSearchText] = useState('')
-
-    const filteredComments = comments.filter((comment) => {
+    const [displayNone, setDisplay] = useState('none')
+    const [commentList, setCommentList] = useState(comments)
+    
+    const filteredComments = commentList.filter((comment) => {
         return comment.user.includes(searchText);
     })
-
-    const [currentState, setState] = useState('none')
-    function handleCommentsToggle () {
-        setState((currentState) => !currentState)
-    }
-
+  
     const commentItems = filteredComments.map((comment) => {
         return (
             <Comment 
@@ -26,16 +23,20 @@ const Comments = ({comments}) => {
         )
     })
 
-    const [commentList, setCommentList] = useState(commentItems)
-    function handleDelete (id) {
-        console.log(id)
-        const newComments = commentList.filter((comment) => { 
-            console.log(comment)
-            return comment.id !== id})
-        console.log(newComments)
-        setCommentList(newComments)
+    function handleSortToggle () {
+        const sortingComments = [...commentList].sort((a, b) => a.user.localeCompare(b.user))
+        setCommentList(sortingComments)
     }
-    console.log(commentList)
+
+    function handleCommentsToggle () {
+        setDisplay((displayNone) => !displayNone)
+    }
+    
+    function handleDelete (id) {
+        const newComments = commentList.filter((comment) => comment.id !== id)
+        setCommentList([...newComments])
+    }
+    
     function handleSearch (event) {
         setSearchText(event.target.value) 
     }
@@ -43,11 +44,12 @@ const Comments = ({comments}) => {
     return(
         <>
         <div className="button">
-            <button className="comments-toggle" onClick={handleCommentsToggle}>{currentState ? "Hide" : "Show" } Comments</button>
+            <button className="comments-toggle" onClick={handleCommentsToggle}>{displayNone ? "Hide" : "Show" } Comments</button>
+            <button className="comments-sort" onClick={handleSortToggle}>Sort Comments By Users</button>
         </div>
-        <input onChange={handleSearch} type="text" placeholder="Search" />
+        <input onChange={handleSearch} type="text" placeholder="Search by user..." />
 
-        <div className="comments" style={{ display: currentState ? "block" : "none" }}>
+        <div className="comments" style={{ display: displayNone ? "block" : "none" }}>
             <h3>{comments.length} Comments</h3>
             {commentItems}
         </div>
