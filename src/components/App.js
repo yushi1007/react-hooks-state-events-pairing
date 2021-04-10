@@ -6,9 +6,14 @@ import Votes from "./Votes.js";
 function App() {
   return (
     <div className="App">
-     <Video embedUrl={video.embedUrl} title={video.title} views={video.views} createdAt={video.createdAt}/>
-     <Votes upvotes={video.upvotes} downvotes={video.downvotes}/>
-     <Comments comments={video.comments}/>
+        <iframe
+        width="919"
+        height="525"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        frameborder="0"
+        allowfullscreen
+        title="Thinking in React"
+      />
     </div>
   );
 }
