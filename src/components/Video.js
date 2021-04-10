@@ -1,4 +1,4 @@
-
+import React from "react";
 
 const Video = ({title, embedUrl, views, createdAt}) => {
     // const {title, embedUrl, views, createdAt} = video
