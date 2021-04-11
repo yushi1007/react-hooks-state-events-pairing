@@ -25,8 +25,8 @@ const CommentList = ({comments}) => {
             />        
     ));
 
-    function handleSortToggle () {
-        const sortingComments = [...commentList].sort((b, a) => b.user.localeCompare(a.user))
+    const handleSort = () => {
+        const sortingComments = [...commentList].sort((a, b) => a.user.localeCompare(b.user))
         setCommentList(sortingComments)
     }
 
@@ -41,7 +41,7 @@ const CommentList = ({comments}) => {
     return (
     <>
         <button onClick={handleClick} className="hide-btn">{isShow ? "Hide" : "Show"} Comments</button>
-        <button className="comments-sort" onClick={handleSortToggle}>Sort Comments By Users</button>
+        <button className="comments-sort" onClick={handleSort} value="user">Sort Comments By Users</button>
             <hr/>
         <input
         type="text"
