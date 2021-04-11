@@ -1,7 +1,8 @@
-import video from "../data/video.js";
-import Comments from "./Comments.js";
-import Video from "./Video.js";
-import Votes from "./Votes.js";
+import React from 'react';
+import VideoDetail from './VideoDetails';
+import video from '../data/video';
+import CommentList from './CommentList';
+
 
 function App() {
   return (
@@ -9,11 +10,19 @@ function App() {
         <iframe
         width="919"
         height="525"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        src={video.embedUrl}
         frameborder="0"
         allowfullscreen
-        title="Thinking in React"
+        title={video.title}
       />
+      <VideoDetail 
+      title={video.title} 
+      views={video.views}  
+      createdAt={video.createdAt}
+      upvotes={video.upvotes}
+      downvotes={video.downvotes}
+      /><br></br>
+      <CommentList comments={video.comments}/>
     </div>
   );
 }

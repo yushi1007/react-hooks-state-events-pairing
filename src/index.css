@@ -10,3 +10,23 @@ body {
 .App {
   text-align: center;
 }
+.delete-btn {
+  color: rgb(113, 111, 111);
+  font-size: 1rem;
+  border: none;
+  background: none;
+  transition: color 300ms;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  color: rgb(0, 0, 0);
+}
+
+.delete-btn:active {
+  color: rgb(89, 88, 88);
+}
+
+.delete-btn:focus {
+  outline: none;
+}
